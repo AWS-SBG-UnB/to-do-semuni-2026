@@ -29,7 +29,7 @@ export default function TodoApp() {
     e.preventDefault();
     const trimmed = text.trim();
     if (!trimmed) return;
-    setTodos([{ id: crypto.randomUUID(), text: trimmed, done: false }, ...todos]);
+    setTodos([{ id: ""+Math.random(), text: trimmed, done: false }, ...todos]);
     setText("");
   }
 
