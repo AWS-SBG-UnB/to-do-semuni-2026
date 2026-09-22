@@ -6,3 +6,27 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - todo-network
+  proxy:
+    image: 'jc21/nginx-proxy-manager:2.15.1'
+    restart: unless-stopped
+    environment:
+      TZ: "America/Sao_Paulo"
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - nginx_data:/data
+      - letsencrypt_data:/etc/letsencrypt
+    networks:
+      - todo-network
+
+volumes:
+  nginx_data:
+  letsencrypt_data:
+
+networks:
+  todo-network:
+    driver: bridge
