@@ -64,3 +64,39 @@ Se mudar código, aí sim precisa rebuildar:
 ```bash
 docker compose up -d --build
 ```
+
+---
+## Rodando no EC2
+1. Crie uma instância EC2 (Ubuntu 22.04 LTS) abrindo o acesso http para qualquer usuário e IP.
+2.  Acesse a instância via SSH e instale o Node.js (versão 20.x). Utilize os comandos na página de instalação do Node ([Link](https://nodejs.org/en/download))
+3. Clone o repositório do projeto na instância EC2:
+    ```bash
+    git clone https://github.com/AWS-SBG-UnB/to-do-semuni-2026.git/
+    ```
+4. Acesse o diretório do projeto:
+    ```bash
+    cd to-do-semuni-2026
+    ```
+5. Instale as dependências do projeto:
+    ```bash
+    npm install
+    ```
+6. Crie o arquivo `.env` com as variáveis de ambiente necessárias, copiando do `.env.example`:
+    ```bash
+    cp .env.example .env
+    ```
+7. Edite o arquivo `.env` para definir as variáveis de ambiente conforme necessário:
+    ```bash
+    nano .env
+    ```
+8. Crie um domínio no site DuckDNS (https://www.duckdns.org/) e configure o domínio para apontar para o IP público da sua instância EC2.
+9. Rode o build do projeto:
+    ```bash
+    npm run build
+    ```
+10. Inicie a aplicação com sudo passando as variáveis de ambiente para o usuário root:
+    ```bash
+    sudo "PATH=$PATH" npm start -- -p 80
+    ```
+11. Acesse o site pelo domínio configurado no DuckDNS
+
