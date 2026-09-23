@@ -96,7 +96,7 @@ docker compose up -d --build
     ```
 10. Inicie a aplicação com sudo passando as variáveis de ambiente para o usuário root:
     ```bash
-    sudo "PATH=$PATH" npm start -- -p 80
+    sudo env "PATH=$PATH" npm start -- -p 80
     ```
 11. Acesse o site pelo domínio configurado no DuckDNS
 
